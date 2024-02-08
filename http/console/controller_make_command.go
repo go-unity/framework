@@ -75,7 +75,7 @@ func (receiver *ControllerMakeCommand) populateStub(stub string, name string) st
 	controllerName, packageName, _ := receiver.parseName(name)
 
 	stub = strings.ReplaceAll(stub, "DummyController", str.Case2Camel(controllerName))
-	stub = strings.ReplaceAll(stub, "DummyPackage", packageName)
+	stub = strings.ReplaceAll(stub, "DummyPackage", str.Camel2Case(packageName))
 
 	return stub
 }
@@ -86,7 +86,7 @@ func (receiver *ControllerMakeCommand) getPath(name string) string {
 
 	controllerName, _, folderPath := receiver.parseName(name)
 
-	return filepath.Join(pwd, "app", "http", "controllers", folderPath, str.Camel2Case(controllerName)+".go")
+	return filepath.Join(pwd, "internal", "infra", "http", "controllers", str.Camel2Case(folderPath), str.Camel2Case(controllerName)+".go")
 }
 
 // parseName Parse the name to get the controller name, package name and folder path.

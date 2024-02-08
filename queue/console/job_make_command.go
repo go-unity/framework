@@ -60,7 +60,7 @@ func (receiver *JobMakeCommand) populateStub(stub string, name string) string {
 
 	stub = strings.ReplaceAll(stub, "DummyJob", str.Case2Camel(jobName))
 	stub = strings.ReplaceAll(stub, "DummyName", str.Camel2Case(jobName))
-	stub = strings.ReplaceAll(stub, "DummyPackage", packageName)
+	stub = strings.ReplaceAll(stub, "DummyPackage", str.Camel2Case(packageName))
 
 	return stub
 }
@@ -71,7 +71,7 @@ func (receiver *JobMakeCommand) getPath(name string) string {
 
 	jobName, _, folderPath := receiver.parseName(name)
 
-	return filepath.Join(pwd, "app", "jobs", folderPath, str.Camel2Case(jobName)+".go")
+	return filepath.Join(pwd, "internal", "jobs", str.Camel2Case(folderPath), str.Camel2Case(jobName)+".go")
 }
 
 // parseName Parse the name to get the job name, package name and folder path.

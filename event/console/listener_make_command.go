@@ -60,7 +60,7 @@ func (receiver *ListenerMakeCommand) populateStub(stub string, name string) stri
 
 	stub = strings.ReplaceAll(stub, "DummyListener", str.Case2Camel(listenerName))
 	stub = strings.ReplaceAll(stub, "DummyName", str.Camel2Case(listenerName))
-	stub = strings.ReplaceAll(stub, "DummyPackage", packageName)
+	stub = strings.ReplaceAll(stub, "DummyPackage", str.Camel2Case(packageName))
 
 	return stub
 }
@@ -71,7 +71,7 @@ func (receiver *ListenerMakeCommand) getPath(name string) string {
 
 	listenerName, _, folderPath := receiver.parseName(name)
 
-	return filepath.Join(pwd, "app", "listeners", folderPath, str.Camel2Case(listenerName)+".go")
+	return filepath.Join(pwd, "internal", "listeners", str.Camel2Case(folderPath), str.Camel2Case(listenerName)+".go")
 }
 
 // parseName Parse the name to get the listener name, package name and folder path.

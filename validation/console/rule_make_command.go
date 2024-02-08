@@ -60,7 +60,7 @@ func (receiver *RuleMakeCommand) populateStub(stub string, name string) string {
 
 	stub = strings.ReplaceAll(stub, "DummyRule", str.Case2Camel(ruleName))
 	stub = strings.ReplaceAll(stub, "DummyName", str.Camel2Case(ruleName))
-	stub = strings.ReplaceAll(stub, "DummyPackage", packageName)
+	stub = strings.ReplaceAll(stub, "DummyPackage", str.Camel2Case(packageName))
 
 	return stub
 }
@@ -71,7 +71,7 @@ func (receiver *RuleMakeCommand) getPath(name string) string {
 
 	ruleName, _, folderPath := receiver.parseName(name)
 
-	return filepath.Join(pwd, "app", "rules", folderPath, str.Camel2Case(ruleName)+".go")
+	return filepath.Join(pwd, "internal", "rules", str.Camel2Case(folderPath), str.Camel2Case(ruleName)+".go")
 }
 
 // parseName Parse the name to get the rule name, package name and folder path.

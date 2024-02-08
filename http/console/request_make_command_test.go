@@ -19,13 +19,13 @@ func TestRequestMakeCommand(t *testing.T) {
 	mockContext.On("Argument", 0).Return("CreateUser").Once()
 	err = requestMakeCommand.Handle(mockContext)
 	assert.Nil(t, err)
-	assert.True(t, file.Exists("app/http/requests/create_user.go"))
+	assert.True(t, file.Exists("internal/infra/http/requests/create_user.go"))
 
 	mockContext.On("Argument", 0).Return("User/Auth").Once()
 	err = requestMakeCommand.Handle(mockContext)
 	assert.Nil(t, err)
-	assert.True(t, file.Exists("app/http/requests/User/auth.go"))
-	assert.True(t, file.Contain("app/http/requests/User/auth.go", "package User"))
-	assert.True(t, file.Contain("app/http/requests/User/auth.go", "type Auth struct"))
-	assert.Nil(t, file.Remove("app"))
+	assert.True(t, file.Exists("internal/infra/http/requests/user/auth.go"))
+	assert.True(t, file.Contain("internal/infra/http/requests/user/auth.go", "package user"))
+	assert.True(t, file.Contain("internal/infra/http/requests/user/auth.go", "type Auth struct"))
+	assert.Nil(t, file.Remove("internal"))
 }

@@ -16,16 +16,16 @@ func TestEventMakeCommand(t *testing.T) {
 	err := eventMakeCommand.Handle(mockContext)
 	assert.EqualError(t, err, "Not enough arguments (missing: name) ")
 
-	mockContext.On("Argument", 0).Return("GoravelEvent").Once()
+	mockContext.On("Argument", 0).Return("gounityEvent").Once()
 	err = eventMakeCommand.Handle(mockContext)
 	assert.Nil(t, err)
-	assert.True(t, file.Exists("app/events/goravel_event.go"))
+	assert.True(t, file.Exists("internal/events/gounity_event.go"))
 
-	mockContext.On("Argument", 0).Return("Goravel/Event").Once()
+	mockContext.On("Argument", 0).Return("gounity/Event").Once()
 	err = eventMakeCommand.Handle(mockContext)
 	assert.Nil(t, err)
-	assert.True(t, file.Exists("app/events/Goravel/event.go"))
-	assert.True(t, file.Contain("app/events/Goravel/event.go", "package Goravel"))
-	assert.True(t, file.Contain("app/events/Goravel/event.go", "type Event struct {"))
-	assert.Nil(t, file.Remove("app"))
+	assert.True(t, file.Exists("internal/events/gounity/event.go"))
+	assert.True(t, file.Contain("internal/events/gounity/event.go", "package gounity"))
+	assert.True(t, file.Contain("internal/events/gounity/event.go", "type Event struct {"))
+	assert.Nil(t, file.Remove("internal"))
 }

@@ -16,16 +16,16 @@ func TestJobMakeCommand(t *testing.T) {
 	err := jobMakeCommand.Handle(mockContext)
 	assert.EqualError(t, err, "Not enough arguments (missing: name) ")
 
-	mockContext.On("Argument", 0).Return("GoravelJob").Once()
+	mockContext.On("Argument", 0).Return("GounityJob").Once()
 	err = jobMakeCommand.Handle(mockContext)
 	assert.Nil(t, err)
-	assert.True(t, file.Exists("app/jobs/goravel_job.go"))
+	assert.True(t, file.Exists("internal/jobs/gounity_job.go"))
 
-	mockContext.On("Argument", 0).Return("Goravel/Job").Once()
+	mockContext.On("Argument", 0).Return("Gounity/Job").Once()
 	err = jobMakeCommand.Handle(mockContext)
 	assert.Nil(t, err)
-	assert.True(t, file.Exists("app/jobs/Goravel/job.go"))
-	assert.True(t, file.Contain("app/jobs/Goravel/job.go", "package Goravel"))
-	assert.True(t, file.Contain("app/jobs/Goravel/job.go", "type Job struct"))
-	assert.Nil(t, file.Remove("app"))
+	assert.True(t, file.Exists("internal/jobs/gounity/job.go"))
+	assert.True(t, file.Contain("internal/jobs/gounity/job.go", "package gounity"))
+	assert.True(t, file.Contain("internal/jobs/gounity/job.go", "type Job struct"))
+	assert.Nil(t, file.Remove("internal"))
 }

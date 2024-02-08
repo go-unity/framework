@@ -60,7 +60,7 @@ func (receiver *RequestMakeCommand) populateStub(stub string, name string) strin
 
 	stub = strings.ReplaceAll(stub, "DummyRequest", str.Case2Camel(requestName))
 	stub = strings.ReplaceAll(stub, "DummyField", "Name string `form:\"name\" json:\"name\"`")
-	stub = strings.ReplaceAll(stub, "DummyPackage", packageName)
+	stub = strings.ReplaceAll(stub, "DummyPackage", str.Camel2Case(packageName))
 
 	return stub
 }
@@ -71,7 +71,7 @@ func (receiver *RequestMakeCommand) getPath(name string) string {
 
 	requestName, _, folderPath := receiver.parseName(name)
 
-	return filepath.Join(pwd, "app", "http", "requests", folderPath, str.Camel2Case(requestName)+".go")
+	return filepath.Join(pwd, "internal", "infra", "http", "requests", str.Camel2Case(folderPath), str.Camel2Case(requestName)+".go")
 }
 
 // parseName Parse the name to get the request name, package name and folder path.

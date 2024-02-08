@@ -58,7 +58,7 @@ func (receiver *EventMakeCommand) getStub() string {
 func (receiver *EventMakeCommand) populateStub(stub string, name string) string {
 	eventName, packageName, _ := receiver.parseName(name)
 	stub = strings.ReplaceAll(stub, "DummyEvent", str.Case2Camel(eventName))
-	stub = strings.ReplaceAll(stub, "DummyPackage", packageName)
+	stub = strings.ReplaceAll(stub, "DummyPackage", str.Camel2Case(packageName))
 
 	return stub
 }
@@ -69,7 +69,7 @@ func (receiver *EventMakeCommand) getPath(name string) string {
 
 	eventName, _, folderPath := receiver.parseName(name)
 
-	return filepath.Join(pwd, "app", "events", folderPath, str.Camel2Case(eventName)+".go")
+	return filepath.Join(pwd, "internal", "events", str.Camel2Case(folderPath), str.Camel2Case(eventName)+".go")
 }
 
 // parseName Parse the name to get the event name, package name and folder path.

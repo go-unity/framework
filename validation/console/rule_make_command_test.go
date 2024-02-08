@@ -19,13 +19,13 @@ func TestRuleMakeCommand(t *testing.T) {
 	mockContext.On("Argument", 0).Return("Uppercase").Once()
 	err = requestMakeCommand.Handle(mockContext)
 	assert.Nil(t, err)
-	assert.True(t, file.Exists("app/rules/uppercase.go"))
+	assert.True(t, file.Exists("internal/rules/uppercase.go"))
 
 	mockContext.On("Argument", 0).Return("User/Phone").Once()
 	err = requestMakeCommand.Handle(mockContext)
 	assert.Nil(t, err)
-	assert.True(t, file.Exists("app/rules/User/phone.go"))
-	assert.True(t, file.Contain("app/rules/User/phone.go", "package User"))
-	assert.True(t, file.Contain("app/rules/User/phone.go", "type Phone struct"))
-	assert.Nil(t, file.Remove("app"))
+	assert.True(t, file.Exists("internal/rules/user/phone.go"))
+	assert.True(t, file.Contain("internal/rules/user/phone.go", "package user"))
+	assert.True(t, file.Contain("internal/rules/user/phone.go", "type Phone struct"))
+	assert.Nil(t, file.Remove("internal"))
 }

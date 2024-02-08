@@ -19,14 +19,14 @@ func TestPolicyMakeCommand(t *testing.T) {
 	mockContext.On("Argument", 0).Return("UserPolicy").Once()
 	err = policyMakeCommand.Handle(mockContext)
 	assert.Nil(t, err)
-	assert.True(t, file.Exists("app/policies/user_policy.go"))
+	assert.True(t, file.Exists("internal/policies/user_policy.go"))
 
 	mockContext.On("Argument", 0).Return("User/AuthPolicy").Once()
 	err = policyMakeCommand.Handle(mockContext)
 	assert.Nil(t, err)
-	assert.True(t, file.Exists("app/policies/User/auth_policy.go"))
-	assert.True(t, file.Contain("app/policies/User/auth_policy.go", "package User"))
-	assert.True(t, file.Contain("app/policies/User/auth_policy.go", "type AuthPolicy struct {"))
+	assert.True(t, file.Exists("internal/policies/user/auth_policy.go"))
+	assert.True(t, file.Contain("internal/policies/user/auth_policy.go", "package user"))
+	assert.True(t, file.Contain("internal/policies/user/auth_policy.go", "type AuthPolicy struct {"))
 
-	assert.Nil(t, file.Remove("app"))
+	assert.Nil(t, file.Remove("internal"))
 }

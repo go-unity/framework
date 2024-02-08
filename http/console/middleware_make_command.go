@@ -59,7 +59,7 @@ func (receiver *MiddlewareMakeCommand) populateStub(stub string, name string) st
 	middlewareName, packageName, _ := receiver.parseName(name)
 
 	stub = strings.ReplaceAll(stub, "DummyMiddleware", str.Case2Camel(middlewareName))
-	stub = strings.ReplaceAll(stub, "DummyPackage", packageName)
+	stub = strings.ReplaceAll(stub, "DummyPackage", str.Camel2Case(packageName))
 
 	return stub
 }
@@ -70,7 +70,7 @@ func (receiver *MiddlewareMakeCommand) getPath(name string) string {
 
 	middlewareName, _, folderPath := receiver.parseName(name)
 
-	return filepath.Join(pwd, "app", "http", "middleware", folderPath, str.Camel2Case(middlewareName)+".go")
+	return filepath.Join(pwd, "internal", "infra", "http", "middleware", str.Camel2Case(folderPath), str.Camel2Case(middlewareName)+".go")
 }
 
 // parseName Parse the name to get the middleware name, package name and folder path.

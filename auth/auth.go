@@ -18,7 +18,7 @@ import (
 	"github.com/go-unity/framework/support/database"
 )
 
-const ctxKey = "GoravelAuth"
+const ctxKey = "GounityAuth"
 
 type Claims struct {
 	Key string `json:"key"`

@@ -63,7 +63,7 @@ func (receiver *PolicyMakeCommand) populateStub(stub string, name string) string
 	policyName, packageName, _ := receiver.parseName(name)
 
 	stub = strings.ReplaceAll(stub, "DummyPolicy", str.Case2Camel(policyName))
-	stub = strings.ReplaceAll(stub, "DummyPackage", packageName)
+	stub = strings.ReplaceAll(stub, "DummyPackage", str.Camel2Case(packageName))
 
 	return stub
 }
@@ -74,7 +74,7 @@ func (receiver *PolicyMakeCommand) getPath(name string) string {
 
 	policyName, _, folderPath := receiver.parseName(name)
 
-	return filepath.Join(pwd, "app", "policies", folderPath, str.Camel2Case(policyName)+".go")
+	return filepath.Join(pwd, "internal", "policies", str.Camel2Case(folderPath), str.Camel2Case(policyName)+".go")
 }
 
 // parseName Parse the name to get the policy name, package name and folder path.

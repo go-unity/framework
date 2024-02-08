@@ -14,15 +14,15 @@ func TestApp(t *testing.T) {
 	}{
 		"no args": {
 			a:        []string{},
-			expected: "app",
+			expected: "internal",
 		},
 		"single arg": {
 			a:        []string{"config/gounity.go"},
-			expected: filepath.Join("app", "config", "gounity.go"),
+			expected: filepath.Join("internal", "config", "gounity.go"),
 		},
 		"multi arg": {
 			a:        []string{"config/gounity.go", "database/migrations"},
-			expected: filepath.Join("app", "config", "gounity.go"),
+			expected: filepath.Join("internal", "config", "gounity.go"),
 		},
 	}
 

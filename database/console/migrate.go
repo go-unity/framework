@@ -52,14 +52,14 @@ func getMigrate(config config.Config) (*migrate.Migrate, error) {
 		}
 
 		return migrate.NewWithDatabaseInstance(dir, "mysql", instance)
-	case orm.DriverPostgresql:
+	case orm.DriverPostgres:
 		dsn := db.NewDsnImpl(config, connection)
-		postgresqlDsn := dsn.Postgresql(writeConfigs[0])
-		if postgresqlDsn == "" {
+		postgresDsn := dsn.Postgres(writeConfigs[0])
+		if postgresDsn == "" {
 			return nil, nil
 		}
 
-		db, err := sql.Open("postgres", postgresqlDsn)
+		db, err := sql.Open("postgres", postgresDsn)
 		if err != nil {
 			return nil, err
 		}

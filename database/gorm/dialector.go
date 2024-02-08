@@ -79,7 +79,7 @@ func (d *DialectorImpl) mysql(config databasecontract.Config) gorm.Dialector {
 }
 
 func (d *DialectorImpl) postgresql(config databasecontract.Config) gorm.Dialector {
-	dsn := d.dsn.Postgresql(config)
+	dsn := d.dsn.Postgres(config)
 	if dsn == "" {
 		return nil
 	}

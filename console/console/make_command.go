@@ -55,7 +55,7 @@ func (receiver *MakeCommand) populateStub(stub string, name string) string {
 	commandName, packageName, _ := receiver.parseName(name)
 
 	stub = strings.ReplaceAll(stub, "DummyCommand", str.Case2Camel(commandName))
-	stub = strings.ReplaceAll(stub, "DummyPackage", packageName)
+	stub = strings.ReplaceAll(stub, "DummyPackage", str.Camel2Case(packageName))
 
 	return stub
 }
@@ -66,7 +66,7 @@ func (receiver *MakeCommand) getPath(name string) string {
 
 	commandName, _, folderPath := receiver.parseName(name)
 
-	return filepath.Join(pwd, "app", "console", "commands", folderPath, str.Camel2Case(commandName)+".go")
+	return filepath.Join(pwd, "internal", "console", "commands", str.Camel2Case(folderPath), str.Camel2Case(commandName)+".go")
 }
 
 // parseName Parse the name to get the command name, package name and folder path.

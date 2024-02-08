@@ -14,13 +14,13 @@ func TestMakeCommand(t *testing.T) {
 	mockContext := &consolemocks.Context{}
 	mockContext.On("Argument", 0).Return("CleanCache").Once()
 	assert.Nil(t, makeCommand.Handle(mockContext))
-	assert.True(t, file.Exists("app/console/commands/clean_cache.go"))
+	assert.True(t, file.Exists("internal/console/commands/clean_cache.go"))
 
-	mockContext.On("Argument", 0).Return("Goravel/CleanCache").Once()
+	mockContext.On("Argument", 0).Return("Gounity/CleanCache").Once()
 	assert.Nil(t, makeCommand.Handle(mockContext))
-	assert.True(t, file.Exists("app/console/commands/Goravel/clean_cache.go"))
-	assert.True(t, file.Contain("app/console/commands/Goravel/clean_cache.go", "package Goravel"))
-	assert.True(t, file.Contain("app/console/commands/Goravel/clean_cache.go", "type CleanCache struct"))
+	assert.True(t, file.Exists("internal/console/commands/gounity/clean_cache.go"))
+	assert.True(t, file.Contain("internal/console/commands/gounity/clean_cache.go", "package gounity"))
+	assert.True(t, file.Contain("internal/console/commands/gounity/clean_cache.go", "type CleanCache struct"))
 
-	assert.Nil(t, file.Remove("app"))
+	assert.Nil(t, file.Remove("internal"))
 }

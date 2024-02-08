@@ -64,7 +64,7 @@ func (receiver *SeederMakeCommand) populateStub(stub string, name string) string
 	modelName, packageName, _ := receiver.parseName(name)
 
 	stub = strings.ReplaceAll(stub, "DummySeeder", str.Case2Camel(modelName))
-	stub = strings.ReplaceAll(stub, "DummyPackage", packageName)
+	stub = strings.ReplaceAll(stub, "DummyPackage", str.Camel2Case(packageName))
 
 	return stub
 }
@@ -75,7 +75,7 @@ func (receiver *SeederMakeCommand) getPath(name string) string {
 
 	modelName, _, folderPath := receiver.parseName(name)
 
-	return filepath.Join(pwd, "database", "seeders", folderPath, str.Camel2Case(modelName)+".go")
+	return filepath.Join(pwd, "database", "seeders", str.Camel2Case(folderPath), str.Camel2Case(modelName)+".go")
 }
 
 // parseName Parse the name to get the model name, package name and folder path.

@@ -64,7 +64,7 @@ func (receiver *FactoryMakeCommand) populateStub(stub string, name string) strin
 	modelName, packageName, _ := parseName(name, "factories")
 
 	stub = strings.ReplaceAll(stub, "DummyFactory", str.Case2Camel(modelName))
-	stub = strings.ReplaceAll(stub, "DummyPackage", packageName)
+	stub = strings.ReplaceAll(stub, "DummyPackage", str.Camel2Case(packageName))
 
 	return stub
 }
@@ -75,7 +75,7 @@ func (receiver *FactoryMakeCommand) getPath(name string) string {
 
 	modelName, _, folderPath := parseName(name, "factories")
 
-	return filepath.Join(pwd, "database", "factories", folderPath, str.Camel2Case(modelName)+".go")
+	return filepath.Join(pwd, "database", "factories", str.Camel2Case(folderPath), str.Camel2Case(modelName)+".go")
 }
 
 // parseName Parse the name to get the model name, package name and folder path.

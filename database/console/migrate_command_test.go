@@ -45,7 +45,7 @@ func TestMigrateCommand(t *testing.T) {
 			name: "sqlite",
 			setup: func() {
 				var err error
-				docker := gorm.NewSqliteDocker("goravel")
+				docker := gorm.NewSqliteDocker("gounity")
 				query, err = docker.New()
 				assert.Nil(t, err)
 				mockConfig = docker.MockConfig
@@ -97,7 +97,7 @@ func TestMigrateCommand(t *testing.T) {
 			assert.Nil(t, migrateCommand.Handle(mockContext))
 
 			var agent Agent
-			assert.Nil(t, query.Where("name", "goravel").First(&agent))
+			assert.Nil(t, query.Where("name", "gounity").First(&agent))
 			assert.True(t, agent.ID > 0)
 
 			removeMigrations()
@@ -116,7 +116,7 @@ func createMysqlMigrations() {
   KEY idx_agents_created_at (created_at),
   KEY idx_agents_updated_at (updated_at)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
-INSERT INTO agents (name, created_at, updated_at) VALUES ('goravel', '2023-03-11 16:07:41', '2023-03-11 16:07:45');
+INSERT INTO agents (name, created_at, updated_at) VALUES ('gounity', '2023-03-11 16:07:41', '2023-03-11 16:07:45');
 `)
 	_ = file.Create("database/migrations/20230311160527_create_agents_table.down.sql",
 		`DROP TABLE agents;
@@ -131,7 +131,7 @@ func createPostgresqlMigrations() {
   created_at timestamp NOT NULL,
   updated_at timestamp NOT NULL
 );
-INSERT INTO agents (name, created_at, updated_at) VALUES ('goravel', '2023-03-11 16:07:41', '2023-03-11 16:07:45');
+INSERT INTO agents (name, created_at, updated_at) VALUES ('gounity', '2023-03-11 16:07:41', '2023-03-11 16:07:45');
 `)
 	_ = file.Create("database/migrations/20230311160527_create_agents_table.down.sql",
 		`DROP TABLE agents;
@@ -147,7 +147,7 @@ func createSqlserverMigrations() {
   updated_at datetime NOT NULL,
   PRIMARY KEY (id)
 );
-INSERT INTO agents (name, created_at, updated_at) VALUES ('goravel', '2023-03-11 16:07:41', '2023-03-11 16:07:45');
+INSERT INTO agents (name, created_at, updated_at) VALUES ('gounity', '2023-03-11 16:07:41', '2023-03-11 16:07:45');
 `)
 	_ = file.Create("database/migrations/20230311160527_create_agents_table.down.sql",
 		`DROP TABLE agents;
@@ -162,7 +162,7 @@ func createSqliteMigrations() {
   created_at datetime NOT NULL,
   updated_at datetime NOT NULL
 );
-INSERT INTO agents (name, created_at, updated_at) VALUES ('goravel', '2023-03-11 16:07:41', '2023-03-11 16:07:45');
+INSERT INTO agents (name, created_at, updated_at) VALUES ('gounity', '2023-03-11 16:07:41', '2023-03-11 16:07:45');
 `)
 	_ = file.Create("database/migrations/20230311160527_create_agents_table.down.sql",
 		`DROP TABLE agents;
@@ -171,5 +171,5 @@ INSERT INTO agents (name, created_at, updated_at) VALUES ('goravel', '2023-03-11
 
 func removeMigrations() {
 	_ = file.Remove("database")
-	_ = file.Remove("goravel")
+	_ = file.Remove("gounity")
 }

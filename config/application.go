@@ -49,15 +49,15 @@ func (app *Config) LoadFromEnv(envPath string) {
 }
 
 func (app *Config) LoadFromSecrets(secretsName string) {
+	app.vip.AutomaticEnv()
 	secrets, err := getSecrets(secretsName)
 	if err != nil {
 		log.Fatalf("Error retrieving secrets: %s", err)
 	}
-	viper.SetConfigType("json")
-	if err := viper.ReadConfig(strings.NewReader(secrets)); err != nil {
+	app.vip.SetConfigType("json")
+	if err := app.vip.ReadConfig(strings.NewReader(secrets)); err != nil {
 		log.Fatalf("Error reading config file: %s", err)
 	}
-
 }
 
 // Env Get config from env.

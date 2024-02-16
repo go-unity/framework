@@ -114,7 +114,7 @@ func (s *ApplicationTestSuite) TestQueueMail() {
 
 func mockConfig(mailPort, redisPort int) *configmock.Config {
 	mockConfig := &configmock.Config{}
-	mockConfig.On("GetString", "app.name").Return("goravel")
+	mockConfig.On("GetString", "app.name").Return("gounity")
 	mockConfig.On("GetString", "queue.default").Return("redis")
 	mockConfig.On("GetString", "queue.connections.sync.driver").Return("sync")
 	mockConfig.On("GetString", "queue.connections.redis.driver").Return("redis")
@@ -131,7 +131,7 @@ func mockConfig(mailPort, redisPort int) *configmock.Config {
 		vip.SetConfigType("env")
 		vip.AddConfigPath(".")
 		_ = vip.ReadInConfig()
-		vip.SetEnvPrefix("goravel")
+		vip.SetEnvPrefix("gounity")
 		vip.AutomaticEnv()
 
 		mockConfig.On("GetString", "mail.host").Return(vip.Get("MAIL_HOST"))

@@ -41,6 +41,57 @@ func (s *StringTestSuite) TestAppend() {
 	s.Equal("foobar", Of("foo").Append("bar").Append().String())
 }
 
+func (s *StringTestSuite) TestSplitMap() {
+	tests := []struct {
+		input            string
+		pairSeparator    string
+		elementSeparator string
+		expected         map[string]string
+	}{
+		{
+			input:            "key1:value1,key2:value2",
+			pairSeparator:    ":",
+			elementSeparator: ",",
+			expected: map[string]string{
+				"key1": "value1",
+				"key2": "value2",
+			},
+		},
+		{
+			input:            "key1;value1,key2;value2",
+			pairSeparator:    ";",
+			elementSeparator: ",",
+			expected: map[string]string{
+				"key1": "value1",
+				"key2": "value2",
+			},
+		},
+		{
+			input:            "key1|value1,key2|value2",
+			pairSeparator:    "|",
+			elementSeparator: ",",
+			expected: map[string]string{
+				"key1": "value1",
+				"key2": "value2",
+			},
+		},
+		{
+			input:            "key1|value1;key2|value2",
+			pairSeparator:    "|",
+			elementSeparator: ";",
+			expected: map[string]string{
+				"key1": "value1",
+				"key2": "value2",
+			},
+		},
+	}
+
+	for _, test := range tests {
+		result := Of(test.input).SplitMap(test.pairSeparator, test.elementSeparator)
+		s.Equal(test.expected, result, "Input: %s, Pair Separator: %s, Element Separator: %s", test.input, test.pairSeparator, test.elementSeparator)
+	}
+}
+
 func (s *StringTestSuite) TestBasename() {
 	s.Equal("str", Of("/framework/support/str").Basename().String())
 	s.Equal("str", Of("/framework/support/str/").Basename().String())

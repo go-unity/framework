@@ -1,9 +1,9 @@
 package docker
 
 const (
-	password = "Goravel123"
-	username = "goravel"
-	database = "goravel"
+	password = "Gounity123"
+	username = "gounity"
+	database = "gounity"
 )
 
 type Database struct {

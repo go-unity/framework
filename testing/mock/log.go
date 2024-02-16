@@ -1,6 +1,7 @@
 package mock
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/go-unity/framework/contracts/http"
@@ -8,11 +9,17 @@ import (
 	"github.com/go-unity/framework/support/carbon"
 )
 
+var _ log.Log = &TestLog{}
+
 type TestLog struct {
 }
 
-func NewTestLog() log.Writer {
+func NewTestLog() log.Log {
 	return &TestLog{}
+}
+
+func (r *TestLog) WithContext(ctx context.Context) log.Writer {
+	return r
 }
 
 func (r *TestLog) Debug(args ...any) {

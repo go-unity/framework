@@ -69,6 +69,23 @@ func (s *String) Basename(suffix ...string) *String {
 	return s
 }
 
+// Transforme the string in map of strings
+func (s *String) SplitMap(keyValueSeparator string, pairSeparator string) (strMap map[string]string) {
+	result := make(map[string]string)
+
+	pairs := strings.Split(s.value, pairSeparator)
+	for _, pair := range pairs {
+		parts := strings.Split(pair, keyValueSeparator)
+		if len(parts) == 2 {
+			key := strings.TrimSpace(parts[0])
+			value := strings.TrimSpace(parts[1])
+			result[key] = value
+		}
+	}
+
+	return result
+}
+
 // Before returns the String instance with the substring before the first occurrence of the specified search string.
 func (s *String) Before(search string) *String {
 	index := strings.Index(s.value, search)

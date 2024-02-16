@@ -142,3 +142,11 @@ func TestOsVariables(t *testing.T) {
 	assert.Equal(t, 3306, config.GetInt("APP_PORT"))
 	assert.True(t, config.GetBool("APP_DEBUG"))
 }
+
+func TestAwsVariables(t *testing.T) {
+	assert.Nil(t, os.Setenv("ENV", "production"))
+
+	config := NewConfig("gounity-secrets")
+
+	assert.Equal(t, "gounity", config.GetString("APP_NAME"))
+}
